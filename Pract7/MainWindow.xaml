@@ -1,0 +1,250 @@
+﻿<Window x:Class="Pract7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pract7"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="210"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.RowSpan="2">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Регистрация" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid  HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="160"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Имя:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Фамилия:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Отчество:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Специальность:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Пароль:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Подтверждение пароля:" Margin="3, 3, 3, 3" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <TextBox Text="{Binding NewDoctor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3,2"/>
+                            <TextBox Text="{Binding NewDoctor.LastName, Mode=TwoWay}" Margin="3,2"/>
+                            <TextBox Text="{Binding NewDoctor.MiddleName, Mode=TwoWay}" Margin="3,2"/>
+                            <TextBox Text="{Binding NewDoctor.Specialisation, Mode=TwoWay}" Margin="3,2"/>
+                            <PasswordBox x:Name="regPasBox" Margin="3,2" PasswordChanged="RegPasChanged"/>
+                            <PasswordBox x:Name="regConfirmBox" Margin="3,2" PasswordChanged="RegConfirmChanged"/>
+                            <Button x:Name="RegBut" Content="Зарегистрироваться" Margin="3,2" Click="RegBut_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Row="2">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Вход" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="160"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Id:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Пароль:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <TextBox Text="{Binding AuthId, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <PasswordBox x:Name="authPasBox" Margin="3,3,3,3" PasswordChanged="AuthPasChanged"/>
+                            <Button x:Name="authAuthBut" Content="Войти" Margin="3,3,3,3" Click="authAuthBut_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Row="3">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Row="3">
+                <StackPanel  Orientation="Vertical" Grid.Row="3">
+                    <TextBlock Text="Информация о текущем пользователе" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0, 50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="125"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="8,0,0,0">
+                            <TextBlock Text="Имя:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Фамилия:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Отчество:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Специальность:" Margin="4,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBlock x:Name="infoNameTB" Text="{Binding Doctor.Name, Mode=TwoWay}" Margin="4,4,4,4" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="infoLastTB" Text="{Binding Doctor.LastName, Mode=TwoWay}" Margin="4,4,4,4" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="infoMidTB" Text="{Binding Doctor.MiddleName, Mode=TwoWay}" Margin="4,4,4,4" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="infoSpecTB" Text="{Binding Doctor.Specialisation, Mode=TwoWay}" Margin="4,4,4,4" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Row="0" Grid.Column="1">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Row="0" Grid.Column="1">
+                <StackPanel  Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                    <TextBlock Text="Поиск пациента" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="115"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBox Text="{Binding SearchId, Mode=TwoWay}" Width="140"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <Button x:Name="SearchBut" Content="Поиск" Click="SearchBut_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+                <StackPanel  Orientation="Vertical" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+                    <TextBlock Text="Прием пациента" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0, 50, 0, 30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="170"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Имя:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Фамилия:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Отчество:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="День рождения:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Последний визит:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Последний доктор:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Диагноз:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Регомендации:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <TextBlock Text="{Binding Pacient.Name}" Margin="4, 4, 4, 4"/>
+                            <TextBlock Text="{Binding Pacient.LastName}" Margin="4, 4, 4, 4"/>
+                            <TextBlock Text="{Binding Pacient.MiddleName}" Margin="4, 4, 4, 4"/>
+                            <TextBlock Text="{Binding Pacient.Birthday}" Margin="4, 4, 4, 4"/>
+                            <TextBlock Text="{Binding Pacient.LastAppointment}" Margin="4, 4, 4, 4"/>
+                            <TextBlock x:Name="recepLastDocTB" Text="{Binding Pacient.LastDoctor}" Margin="4, 4, 4, 4"/>
+                            <TextBox Text="{Binding Pacient.Diagnosis, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <TextBox Text="{Binding Pacient.Recomendations, Mode=TwoWay}" Margin="3,3,3,3"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button x:Name="RecepBut" Content="Закончить прием" Margin="50, 0, 50, 0" Click="RecepBut_Click"/>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
+                <StackPanel  Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
+                    <TextBlock Text="Добавление пациента" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0, 30, 0, 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="155"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Имя:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Фамилия:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Отчество:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="День рождения:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Последний визит:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Последний доктор:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <TextBox Text="{Binding NewPacient.Name, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <TextBox Text="{Binding NewPacient.LastName, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <TextBox Text="{Binding NewPacient.MiddleName, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <DatePicker SelectedDate="{Binding NewPacient.Birthday, Mode=TwoWay}" Margin="3,1"/>
+                            <DatePicker SelectedDate="{Binding NewPacient.LastAppointment, Mode=TwoWay}" Margin="3,1"/>
+                            <TextBlock x:Name="addLastDocTB" Text="{Binding NewPacient.LastDoctor}" Margin="0,4,4,4"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button x:Name="AddBut" Content="Добавить пациента" Margin="50, 0, 50, 0" Click="AddBut_Click"/>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Column="2" Grid.Row="3">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="3">
+                <StackPanel  Orientation="Vertical" Grid.Column="2" Grid.Row="3">
+                    <TextBlock Text="Изменение пациента" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <Grid HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="155"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Имя:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Фамилия:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Отчество:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="День рождения:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Text="Последний визит:" Margin="0,4,4,4" HorizontalAlignment="Right" FontStyle="Italic"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="8,0,0,0">
+                            <TextBox Text="{Binding Pacient.Name, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <TextBox Text="{Binding Pacient.LastName, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <TextBox Text="{Binding Pacient.MiddleName, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <DatePicker Text="{Binding Pacient.Birthday, Mode=TwoWay}" Margin="3,3,3,3"/>
+                            <DatePicker Text="{Binding Pacient.LastAppointment, Mode=TwoWay}" Margin="3,3,3,3"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="editBut" Grid.Column="0" Grid.Row="1" Content="Изменить" Margin="10, 10" Click="editBut_Click"/>
+                        <Button x:Name="resetBut" Grid.Column="1" Grid.Row="1" Content="Сбросить" Margin="10, 10" Click="resetBut_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Border BorderBrush="White" BorderThickness="3" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+                    <TextBlock x:Name="totalTB" FontWeight="Bold"  Margin="20,7,20,0"/>
+                    <TextBlock x:Name="docsTB"  Margin="20,7,20,0"/>
+                    <TextBlock x:Name="patsTB"  Margin="20,7,20,0"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>
+</Window>
