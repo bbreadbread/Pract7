@@ -23,8 +23,8 @@ namespace Pract7
        
         private string authId = string.Empty;
         private string searchId = string.Empty;
-        public string AuthId { get => authId; set { authId = value; onPropertyChanged(); } } 
-        public string SearchId { get => searchId; set { searchId = value; onPropertyChanged(); } }
+        public string AuthId { get { return authId; } set { authId = value; onPropertyChanged("AuthId"); } } 
+        public string SearchId { get => searchId; set { searchId = value; onPropertyChanged("SearchId"); } }
         public MainViewModel()
         {
             Doctor = new Doctor();
